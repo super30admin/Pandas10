@@ -1,0 +1,9 @@
+import pandas as pd
+
+def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
+    x = actor_director.groupby(['actor_id','director_id']).count().reset_index()
+    x = x[x['timestamp']>=3]
+    if len(x) == 0:
+      return pd.DataFrame([], columns=['actor_id','director_id'])
+    else:
+      return x[['actor_id','director_id']]
